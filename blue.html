@@ -148,9 +148,20 @@
         xmlhttp.send();
 
         function handleResponse(data) {
-            document.getElementById("player1").innerHTML = data.teams.blue.players[0].user.username;
-            document.getElementById("player2").innerHTML = data.teams.blue.players[1].user.username;
-            document.getElementById("player3").innerHTML = data.teams.blue.players[2].user.username;
+            var users = data.teams.blue.players;
+            for(var i = 0; i < users.length; i++) {
+                switch(users[i].language) {
+                    case 'HTML':
+                        document.getElementById("player1").innerHTML = users[i].user.username;
+                        break;
+                    case 'CSS':
+                        document.getElementById("player2").innerHTML = users[i].user.username;
+                        break;
+                    case 'JS':
+                        document.getElementById("player3").innerHTML = users[i].user.username;
+                        break;
+                }
+            }
         }
     }
 
