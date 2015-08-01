@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Red Team</title>
     <style>
-        @import url(http://fonts.googleapis.com/css?family=Roboto:400,400italic,300|Montserrat);
+        @import url(http://fonts.googleapis.com/css?family=Roboto);
 
         * {
             margin: 0;
@@ -20,49 +20,78 @@
             overflow: hidden;
         }
 
-        iframe {
-            border: 0;
-        }
-
-        #reload {
-            float: right;
-            font-size: 1rem;
-            padding-right: 20px;
-        }
-
         .bar {
             position: absolute;
             width: 100%;
-            height: 50px;
-            line-height: 50px;
-            padding-left: 10px;
+            height: 80px;
+            background-color: #191919;
             color: #fff;
-            background-color: #232323;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2em;
-            font-weight: 400;
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
         }
 
         .bar img {
-            height: 40px;
-            vertical-align: text-top;
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 10px;
         }
 
-        .iframe {
+        .players {
+            display: inline-block;
+            width: 600px;
+            height: 80px;
+            margin: 0 auto;
+            font-size: 0;
+        }
+
+        .players .html { font-weight: bold; color: rgb(228, 80, 38);}
+        .players .css { font-weight: bold; color: rgb(10, 116, 184);}
+        .players .js { font-weight: bold; color: rgb(228, 162, 40);}
+
+        .players span {
+            font-size: 16px;
+            display: inline-block;
+            width: 33.33%;
+            line-height: 40px;
+            text-align: center;
+        }
+
+        iframe {
             position: absolute;
             width: 100%;
             height: calc(100% - 50px);
-            top: 50px;
+            top: 100px;
+            border: 0;
         }
+
+        .right {
+            position: absolute;
+            top: 0;
+            right: 20px;
+        }
+
+        .right #reload {
+            line-height: 80px;
+        }
+
+        .bar-team {
+            position: absolute;
+            top: 80px;
+            width: 100%;
+            height: 10px;
+            background: #E91E63;
+        }
+
     </style>
 </head>
 <body>
 <div class="bar">
-    <div class="left">
-        <img src="logo.png">
-        <span>Team Red - Preview</span>
-    </div>
-    <div class="center">
+    <img src="logo.png">
+    <div class="players">
+        <span class="html">HTML</span>
+        <span class="css">CSS</span>
+        <span class="js">JavaScript</span>
         <span id="player1"></span>
         <span id="player2"></span>
         <span id="player3"></span>
@@ -74,6 +103,7 @@
         </label>
     </div>
 </div>
+<span class="bar-team"></span>
 
 <!--
 <iframe src="http://red.devwars.tv" class="iframe" id="iframe1">
