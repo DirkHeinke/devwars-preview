@@ -117,6 +117,9 @@
 
 <script>
     var reload = false;
+    var standbyUrl = "http://theoi.de/dwtimer";
+    var iframeUrl = "http://blue.devwars.tv/index.html";
+    var apiUrl = "http://devwars.tv/v1/game/currentgame";
 
     getPlayerdata();
 
@@ -127,10 +130,10 @@
     setInterval(function () {
         getPlayerdata();
 
-        if(reload) {
+        if(reload && document.getElementById('iframe1').src == iframeUrl) {
             reloadFrame();
         }
-    }, 30000);
+    }, 10000);
 
     function reloadFrame() {
         var iframe = document.getElementById('iframe1');
@@ -140,15 +143,23 @@
     function getPlayerdata() {
 
         var xmlhttp = new XMLHttpRequest();
-        var url = "http://devwars.tv/v1/game/currentgame";
 
         xmlhttp.onreadystatechange = function() {
+            var iframe = document.getElementById('iframe1');
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                if(iframe.src != iframeUrl) {
+                    iframe.src = iframeUrl;
+                }
                 var data = JSON.parse(xmlhttp.responseText);
                 handleResponse(data);
+            } else if(xmlhttp.readyState == 4 && xmlhttp.status == 404) {
+                console.log('bad request');
+                if(iframe.src == iframeUrl) {
+                    iframe.src = standbyUrl;
+                }
             }
         };
-        xmlhttp.open("GET", url, true);
+        xmlhttp.open("GET", apiUrl, true);
         xmlhttp.send();
 
         function handleResponse(data) {
